@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Editoriales registradas</h2>
+
+<!-- Lista de editoriales -->
+<ul class="list-group mb-4 shadow-sm">
+  <% if (editoriales.length > 0) { %>
+    <% editoriales.forEach(editorial => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><%= editorial.nombre %></span>
+        <div class="d-flex">
+          <a href="/editoriales/ver/<%= editorial.id %>" class="btn btn-info btn-sm me-2">Ver</a>
+          <a href="/editoriales/editar/<%= editorial.id %>" class="btn btn-sm btn-warning me-2">Editar</a>
+          <a href="/editoriales/eliminar/<%= editorial.id %>" class="btn btn-sm btn-danger">Eliminar</a>
+        </div>
+      </li>
+    <% }); %>
+  <% } else { %>
+    <li class="list-group-item text-muted">No hay editoriales registradas.</li>
+  <% } %>
+</ul>
+
+<!-- Formulario para crear una nueva editorial -->
+<div class="card shadow">
+  <div class="card-body">
+    <h5 class="card-title">Añadir nueva editorial</h5>
+    <form action="/editoriales/crear" method="POST" class="row g-3 mt-3" autocomplete="on">
+      <div class="col-12">
+        <label for="nombre" class="form-label">Nombre de la editorial</label>
+        <input type="text" name="nombre" id="nombre" class="form-control" required>
+      </div>
+      <div class="col-12 text-end">
+        <button type="submit" class="btn btn-success">Crear editorial</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

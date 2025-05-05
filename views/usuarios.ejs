@@ -1,0 +1,122 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Usuarios registrados</h2>
+
+<!-- Lista de usuarios -->
+<ul class="list-group mb-4 shadow-sm">
+  <% if (usuarios.length > 0) { %>
+    <% usuarios.forEach(usuario => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><strong><%= usuario.nombre %></strong> - <%= usuario.email %></span>
+        <div class="d-flex">
+          <a href="/usuarios/ver/<%= usuario.id %>" class="btn btn-info btn-sm me-2">Ver</a>
+          <a href="/usuarios/editar/<%= usuario.id %>" class="btn btn-sm btn-warning me-2">Editar</a>
+          <a href="/usuarios/eliminar/<%= usuario.id %>" class="btn btn-sm btn-danger">Eliminar</a>
+        </div>
+      </li>
+    <% }); %>
+  <% } else { %>
+    <li class="list-group-item text-muted">No hay usuarios registrados.</li>
+  <% } %>
+</ul>
+
+<!-- Formulario para añadir nuevo usuario -->
+<div class="card shadow">
+  <div class="card-body">
+    <h5 class="card-title">Añadir nuevo usuario</h5>
+    <form action="<%= action || '/usuarios/crear'%>" method="POST" class="row g-3 mt-3">
+      <div class="col-md-6">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" name="nombre" id="nombre" class="form-control" 
+        value="<%= usuario.nombre || '' %>" required>
+      </div>
+      <div class="col-md-6">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" name="email" id="email" class="form-control" 
+        value="<%= usuario.email || '' %>" required>
+      </div>
+      
+      <!-- Nuevo campo: Teléfono -->
+      <div class="col-md-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input type="tel" name="telefono" id="telefono" class="form-control"
+        value="<%= usuario.telefono || '' %>" pattern="^\d{9}$" placeholder="Número de teléfono" required>
+      </div>
+      
+      <!-- Nuevo campo: Dirección -->
+      <div class="col-md-6">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input type="text" name="direccion" id="direccion" class="form-control"
+        value="<%= usuario.direccion || '' %>" required>
+      </div>
+      
+      <!-- Nuevo campo: Código Postal (CP) -->
+      <div class="col-md-3">
+        <label for="cp" class="form-label">Código Postal</label>
+        <input type="text" name="CP" id=CP" class="form-control"
+        value="<%= usuario.CP || '' %>" required>
+      </div>
+      
+      <!-- Nuevo campo: Población -->
+      <div class="col-md-6">
+        <label for="poblacion" class="form-label">Población</label>
+        <input type="text" name="poblacion" id="poblacion" class="form-control"
+        value="<%= usuario.poblacion || '' %>" required>
+      </div>
+      
+      <!-- Nuevo campo: Provincia -->
+      <div class="col-md-6">
+        <label for="provincia" class="form-label">Provincia</label>
+        <input type="text" name="provincia" id="provincia" class="form-control"
+        value="<%= usuario.provincia || '' %>" required>
+      </div>
+      
+      <!-- Nuevo campo: Estado civil -->
+      <div class="col-md-6">
+        <label class="form-label d-block">Estado civil</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="estado_civil" id="soltero" value="Soltero"
+            <%= usuario.estado_civil === 'Soltero' ? 'checked' : '' %>>
+          <label class="form-check-label" for="soltero">Soltero</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="estado_civil" id="casado" value="Casado"
+            <%= usuario.estado_civil === 'Casado' ? 'checked' : '' %>>
+          <label class="form-check-label" for="casado">Casado</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="estado_civil" id="otro_estado" value="Otro"
+            <%= usuario.estado_civil === 'Otro' ? 'checked' : '' %>>
+          <label class="form-check-label" for="otro_estado">Otro</label>
+        </div>
+      </div>
+
+      <!-- Nuevo campo: Sexo -->
+      <div class="col-md-6">
+        <label class="form-label d-block">Sexo</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sexo" id="masculino" value="Masculino"
+            <%= usuario.sexo === 'Masculino' ? 'checked' : '' %>>
+          <label class="form-check-label" for="masculino">Masculino</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sexo" id="femenino" value="Femenino"
+            <%= usuario.sexo === 'Femenino' ? 'checked' : '' %>>
+          <label class="form-check-label" for="femenino">Femenino</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sexo" id="otro_sexo" value="Otro"
+            <%= usuario.sexo === 'Otro' ? 'checked' : '' %>>
+          <label class="form-check-label" for="otro_sexo">Otro</label>
+        </div>
+      </div>
+
+
+      <div class="col-12 text-end">
+        <button type="submit" class="btn btn-success"><%= usuario.id ? 'Actualizar' : 'Crear' %></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

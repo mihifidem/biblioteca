@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+
+<h2>Editar Libro</h2>
+
+<form method="POST" action="/libros/editar/<%= libro.id %>">
+  <div class="mb-3">
+    <label class="form-label">Título</label>
+    <input type="text" class="form-control" name="titulo" value="<%= libro.titulo %>" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Autor</label>
+    <select name="autor_id" class="form-control">
+      <% autores.forEach(autor => { %>
+        <option value="<%= autor.id %>" <%= autor.id === libro.autor_id ? 'selected' : '' %>><%= autor.nombre %></option>
+      <% }) %>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Editorial</label>
+    <select name="editorial_id" class="form-control">
+      <% editoriales.forEach(ed => { %>
+        <option value="<%= ed.id %>" <%= ed.id === libro.editorial_id ? 'selected' : '' %>><%= ed.nombre %></option>
+      <% }) %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Año de Publicación</label>
+    <input type="number" id="anio_publicacion" name="anio_publicacion" min="1900" max="2155" required>
+  </div>
+  
+
+  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+  <a href="/libros" class="btn btn-secondary">Cancelar</a>
+</form>
+<script>
+    function validarFormulario() {
+      const anio = document.getElementById('anio_publicacion').value;
+      if (!/^\d{4}$/.test(anio) || parseInt(anio) <= 1900) {
+        alert("Introduce un año válido mayor que 1900.");
+        return false;
+      }
+      return true;
+    }
+  </script>
+<%- include('partials/footer') %>

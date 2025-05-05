@@ -1,0 +1,65 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Libros registrados</h2>
+
+<!-- Lista de libros -->
+<ul class="list-group mb-4 shadow-sm">
+  <% if (libros.length > 0) { %>
+    <% libros.forEach(libro => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-start flex-column flex-md-row">
+        <div>
+          <strong><%= libro.titulo %></strong><br>
+          <small>Autor: <%= libro.autor || 'Desconocido' %></small><br>
+          <small>Editorial: <%= libro.editorial || 'Desconocida' %></small>
+        </div>
+        <div class="d-flex mt-2 mt-md-0">
+          <a href="/libros/ver/<%= libro.id %>" class="btn btn-info btn-sm me-2">Ver</a>
+          <a href="/libros/editar/<%= libro.id %>" class="btn btn-warning btn-sm me-2">Editar</a>
+          <a href="/libros/eliminar/<%= libro.id %>" class="btn btn-danger btn-sm">Eliminar</a>
+        </div>
+      </li>
+      
+    <% }); %>
+  <% } else { %>
+    <li class="list-group-item text-muted">No hay libros registrados.</li>
+  <% } %>
+</ul>
+
+<!-- Formulario para añadir nuevo libro -->
+<div class="card shadow">
+  <div class="card-body">
+    <h5 class="card-title">Añadir nuevo libro</h5>
+    <form action="/libros/crear" method="POST" class="row g-3 mt-3">
+      <div class="col-md-6">
+        <label for="titulo" class="form-label">Título del libro</label>
+        <input type="text" name="titulo" id="titulo" class="form-control" required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="autor_id" class="form-label">Autor</label>
+        <select name="autor_id" id="autor_id" class="form-select" required>
+          <option value="">Selecciona un autor</option>
+          <% autores.forEach(autor => { %>
+            <option value="<%= autor.id %>"><%= autor.nombre %></option>
+          <% }); %>
+        </select>
+      </div>
+
+      <div class="col-md-3">
+        <label for="editorial_id" class="form-label">Editorial</label>
+        <select name="editorial_id" id="editorial_id" class="form-select" required>
+          <option value="">Selecciona una editorial</option>
+          <% editoriales.forEach(editorial => { %>
+            <option value="<%= editorial.id %>"><%= editorial.nombre %></option>
+          <% }); %>
+        </select>
+      </div>
+
+      <div class="col-12 text-end">
+        <button type="submit" class="btn btn-success">Crear libro</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
