@@ -9,7 +9,7 @@ const autoresRoutes = require('./routes/autoresRoutes');
 const editorialesRoutes = require('./routes/editorialesRoutes');
 const prestamosRoutes = require('./routes/prestamosRoutes');
 const empleadosRoutes = require('./routes/empleadosRoutes');
-const prestamosroutes = require('./routes/prestamosRoutes');
+const prestamosautorrouter = require('./routes/prestamosautor');
 const rankingalquiler = require('./routes/rankingalquilers');
 
 app.set('view engine', 'ejs');
@@ -23,7 +23,7 @@ app.use('/autores', autoresRoutes);
 app.use('/editoriales', editorialesRoutes);
 app.use('/prestamos', prestamosRoutes);
 app.use('/empleados', empleadosRoutes);
-app.use('/prestamos', prestamosroutes);
+app.use('/prestamosautor', prestamosautorrouter);
 app.use('/rankingsalquileres', rankingalquiler);
 
 app.listen(3000, () => {
