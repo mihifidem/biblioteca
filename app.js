@@ -9,6 +9,8 @@ const autoresRoutes = require('./routes/autoresRoutes');
 const editorialesRoutes = require('./routes/editorialesRoutes');
 const prestamosRoutes = require('./routes/prestamosRoutes');
 const empleadosRoutes = require('./routes/empleadosRoutes');
+const prestamosroutes = require('./routes/prestamosRoutes');
+const rankingalquiler = require('./routes/rankingalquilers');
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +23,8 @@ app.use('/autores', autoresRoutes);
 app.use('/editoriales', editorialesRoutes);
 app.use('/prestamos', prestamosRoutes);
 app.use('/empleados', empleadosRoutes);
+app.use('/prestamos', prestamosroutes);
+app.use('/rankingsalquileres', rankingalquiler);
 
 app.listen(3000, () => {
   console.log('Servidor funcionando en http://localhost:3000');

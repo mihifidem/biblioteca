@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Ranking de Alquileres</h2>
+
+<!-- Lista de préstamos -->
+<ul class="list-group mb-4 shadow-sm">
+  <% if (ranking.length > 0) { %>
+    <% ranking.forEach ( ran => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center"> 
+        <span><strong><%= ran.total %></strong>       <%= ran.nombre %></span>
+      </li>
+    <% }); %>
+  <% } else { %>
+    <li class="list-group-item text-muted">No hay nada</li>
+  <% } %>
+</ul>
+<%- include('partials/footer') %>

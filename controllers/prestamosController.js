@@ -120,3 +120,29 @@ exports.editarPrestamo = async (req, res) => {
     res.send('Error al actualizar préstamo');
   }
 };
+
+exports.prestamosautor = async (req, res) => {
+  const [rows] = await pool.query(`
+    select count(l.titulo) total, a.nombre
+    from libros l
+    join prestamos p
+    on p.libro_id=l.id
+    join autores a
+    on l.autor_id=a.id
+    group by a.nombre
+    order by count(l.titulo) desc;
+  `);
+  res.render('prestamosautor', { autor: rows})
+};
+
+exports.ranking = async (req, res) => {
+  const [rows2] = await pool.query(`
+    select count(*) total, u.nombre
+    from prestamos p
+    join usuarios u
+    on p.usuario_id=u.id
+    group by u.nombre 
+    order by total desc; 
+  `);
+  res.render('rankingalquileres', { ranking: rows2})
+};
