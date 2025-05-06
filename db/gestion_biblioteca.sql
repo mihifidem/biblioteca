@@ -118,3 +118,25 @@ ADD sexo VARCHAR(10);
 
 
 ALTER TABLE libros ADD COLUMN anio_publicacion YEAR;
+
+
+-- Añadir genero-usuario y categoria-libro
+ALTER TABLE usuarios ADD COLUMN genero ENUM('H','M','X');
+ALTER TABLE libros ADD COLUMN id_categoria INT;
+
+UPDATE usuarios SET genero = 'M' WHERE id = 1;
+UPDATE usuarios SET genero = 'H' WHERE id = 2;
+UPDATE usuarios SET genero = 'M' WHERE id = 3;
+UPDATE usuarios SET genero = 'H' WHERE id = 4;
+UPDATE usuarios SET genero = 'M' WHERE id = 5;
+
+UPDATE libros SET id_categoria = 1 WHERE id = 1;
+UPDATE libros SET id_categoria = 2 WHERE id = 2;
+UPDATE libros SET id_categoria = 1 WHERE id = 3;
+UPDATE libros SET id_categoria = 3 WHERE id = 4;
+UPDATE libros SET id_categoria = 4 WHERE id = 5;
+UPDATE libros SET id_categoria = 2 WHERE id = 6;
+UPDATE libros SET id_categoria = 2 WHERE id = 7;
+UPDATE libros SET id_categoria = 1 WHERE id = 8;
+UPDATE libros SET id_categoria = 3 WHERE id = 9;
+UPDATE libros SET id_categoria = 2 WHERE id = 10;
