@@ -141,9 +141,13 @@ UPDATE libros SET id_categoria = 1 WHERE id = 8;
 UPDATE libros SET id_categoria = 3 WHERE id = 9;
 UPDATE libros SET id_categoria = 2 WHERE id = 10;
 
+<<<<<<< HEAD
 alter table libros add precio decimal (5,2);
 
 
 
 alter table libros add paginas int;
 alter table libros add dibujos int;
+=======
+--Falta poner la tabla de categorias libros
+>>>>>>> 9bba166acaa635c7be4c0a972a0fce4e1ef15e26
