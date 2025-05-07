@@ -2,13 +2,12 @@ const pool = require('../db/conexion');
 
 // Mostrar todos los usuarios
 exports.menuDashboard = (req, res) => {
-  res.render("dashboard"); // ✅ nombre correcto de la vista
+  res.render("dashboard");
 };
 
-// Mostrar la Consulta 9
+// Mostrar la Consulta # 9
 exports.librosBaratosCortos = async (req, res) => {
   try {
-    // Realizar la consulta SQL
     const [libros] = await pool.query(
       `SELECT 'Precio Mínimo' AS Segun_Criterio_Min, titulo, precio, paginas, dibujos
        FROM libros
@@ -26,7 +25,6 @@ exports.librosBaratosCortos = async (req, res) => {
        LIMIT 3;`
     );
 
-    // Asegurarse de que 'libros' sea un array
     if (Array.isArray(libros)) {
       res.render('librosBaratosCortos', { libros });
     } else {
@@ -34,8 +32,32 @@ exports.librosBaratosCortos = async (req, res) => {
       res.status(500).send('Error al obtener los libros');
     }
   } catch (error) {
-    // En caso de error, loguear y mostrar un mensaje de error
     console.error('Error al obtener los libros:', error);
     res.status(500).send('Error al obtener los libros');
   }
 };
+
+// Controlador para obtener los alquileres por mes y generar el gráfico
+exports.graficoAlquileresPorMes = async (req, res) => {
+  try {
+    const [resultados] = await pool.query(
+      `SELECT 
+        YEAR(p.fecha_prestamo) AS anio,
+        MONTH(p.fecha_prestamo) AS mes,
+        COUNT(*) AS cantidad_prestamos
+      FROM prestamos p
+      GROUP BY anio, mes
+      ORDER BY anio ASC, mes ASC;`
+    );
+    
+
+    // Reorganizar datos si es necesario para el gráfico (opcional según tu vista)
+    res.render('graficoMensual', { resultados });
+
+  } catch (error) {
+    console.error('Error al obtener los alquileres por mes:', error);
+    res.status(500).send('Error al obtener los alquileres por mes');
+  }
+};
+
+
