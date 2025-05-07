@@ -9,9 +9,14 @@
       <li class="list-group-item d-flex justify-content-between align-items-start flex-column flex-md-row">
         <div>
           <strong>Titulo: <em><%= libro.titulo %> </em></strong><br>
-          <small>Precio: <%= libro.precio || 'Desconocida' %></small><br>
-          <small>Paginas: <%= libro.paginas || 'Desconocido' %></small><br>
+          <small>Precio: <%= libro.precio %></small><br>
+          <small>Paginas: <%= libro.paginas %></small><br>
           <small>Dibujos: <%= libro.dibujos %></small><br>
+          <small>Coincidencias: <%= libro.coincidencias %></small><br>
+          <small>Min_Precio: <%= libro.min_precio %></small><br>
+          <small>Min_Paginas: <%= libro.min_paginas %></small><br>
+          <small>Min_Dibujos: <%= libro.min_dibujos %></small><br>
+
         </div>
       </li>
     <% }); %>

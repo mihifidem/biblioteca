@@ -9,22 +9,30 @@ exports.menuDashboard = (req, res) => {
 exports.librosBaratosCortos = async (req, res) => {
   try {
     const [libros] = await pool.query(
-      `SELECT 'Precio Mínimo' AS Segun_Criterio_Min, titulo, precio, paginas, dibujos
-       FROM libros
-       WHERE precio = (SELECT MIN(precio) FROM libros)
-       UNION ALL
-
-       SELECT 'Páginas Mínimas' AS Segun_Criterio_Min, titulo, precio, paginas, dibujos
-       FROM libros
-       WHERE paginas = (SELECT MIN(paginas) FROM libros)
-       UNION ALL
-
-       SELECT 'Dibujos Mínimos' AS Segun_Criterio_Min, titulo, precio, paginas, dibujos
-       FROM libros
-       WHERE dibujos = (SELECT MIN(dibujos) FROM libros)
-       LIMIT 3;`
+      `SELECT titulo, paginas, dibujos, precio,
+    CASE WHEN paginas = (SELECT MIN(paginas) FROM libros) THEN '✔' ELSE '✘' END AS min_paginas,
+    CASE WHEN dibujos = (SELECT MIN(dibujos) FROM libros) THEN '✔' ELSE '✘' END AS min_dibujos,
+    CASE WHEN precio = (SELECT MIN(precio) FROM libros) THEN '✔' ELSE '✘' END AS min_precio,
+    (paginas = (SELECT MIN(paginas) FROM libros)) +
+    (dibujos = (SELECT MIN(dibujos) FROM libros)) +
+    (precio = (SELECT MIN(precio) FROM libros)) AS coincidencias
+    FROM libros
+    HAVING coincidencias >= 2;`
     );
+// SELECT 'Precio Mínimo' AS Segun_Criterio_Min, titulo, precio, paginas, dibujos
+//        FROM libros
+//        WHERE precio = (SELECT MIN(precio) FROM libros)
+//        UNION ALL
 
+//        SELECT 'Páginas Mínimas' AS Segun_Criterio_Min, titulo, precio, paginas, dibujos
+//        FROM libros
+//        WHERE paginas = (SELECT MIN(paginas) FROM libros)
+//        UNION ALL
+
+//        SELECT 'Dibujos Mínimos' AS Segun_Criterio_Min, titulo, precio, paginas, dibujos
+//        FROM libros
+//        WHERE dibujos = (SELECT MIN(dibujos) FROM libros)
+//        LIMIT 3;
     if (Array.isArray(libros)) {
       res.render('librosBaratosCortos', { libros });
     } else {
