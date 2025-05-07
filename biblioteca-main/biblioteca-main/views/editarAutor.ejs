@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Editar usuario</h2>
+
+<div class="card shadow">
+  <div class="card-body">
+    <form action="/autores/editar/<%= autor.id %>" method="POST" class="row g-3">
+      <div class="col-md-6">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" name="nombre" id="nombre" value="<%= autor.nombre %>" class="form-control" required>
+      </div>
+      
+      <div class="col-12 text-end">
+        <a href="/autores" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

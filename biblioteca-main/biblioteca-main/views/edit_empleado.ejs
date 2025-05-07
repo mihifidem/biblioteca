@@ -1,0 +1,71 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Editar empleado</h2>
+
+<div class="card shadow">
+  <div class="card-body">
+    <form action="<%= action %>" method="POST" class="row g-3">
+        <div class="col-md-6">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" name="nombre" id="nombre" value="<%= empleado.nombre %>" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="email" id="email" value="<%= empleado.email %>" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label for="dni" class="form-label">DNI</label>
+          <input type="text" name="dni" id="dni" value="<%= empleado.dni %>" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input type="text" name="telefono" id="telefono" value="<%= empleado.telefono %>" class="form-control">
+        </div>
+        <div class="col-md-12">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input type="text" name="direccion" id="direccion" value="<%= empleado.direccion %>" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="CP" class="form-label">Código Postal</label>
+          <input type="text" name="CP" id="CP" value="<%= empleado.CP %>" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="poblacion" class="form-label">Población</label>
+          <input type="text" name="poblacion" id="poblacion" value="<%= empleado.poblacion %>" class="form-control">
+        </div>
+        <div class="col-md-4">
+          <label for="provincia" class="form-label">Provincia</label>
+          <input type="text" name="provincia" id="provincia" value="<%= empleado.provincia %>" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label for="IBAN" class="form-label">IBAN</label>
+          <input type="text" name="IBAN" id="IBAN" value="<%= empleado.IBAN %>" class="form-control">
+        </div>
+        <div class="col-md-3">
+          <label for="estado_civil" class="form-label">Estado Civil</label>
+          <select name="estado_civil" id="estado_civil" class="form-select">
+            <option value="">Seleccione</option>
+            <option value="Soltero" <%= empleado.estado_civil === 'Soltero' ? 'selected' : '' %>>Soltero</option>
+            <option value="Casado" <%= empleado.estado_civil === 'Casado' ? 'selected' : '' %>>Casado</option>
+            <option value="Otro" <%= empleado.estado_civil === 'Otro' ? 'selected' : '' %>>Otro</option>
+          </select>
+        </div>
+        
+        <div class="col-md-3">
+          <label for="sexo" class="form-label">Sexo</label>
+          <select name="sexo" id="sexo" class="form-select">
+            <option value="">Seleccione</option>
+            <option value="Masculino" <%= empleado.sexo === 'Masculino' ? 'selected' : '' %>>Masculino</option>
+            <option value="Femenino" <%= empleado.sexo === 'Femenino' ? 'selected' : '' %>>Femenino</option>
+            <option value="Otro" <%= empleado.sexo === 'Otro' ? 'selected' : '' %>>Otro</option>
+          </select>
+        </div>
+        <div class="col-12 text-end">
+          <a href="/empleados" class="btn btn-secondary">Cancelar</a>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

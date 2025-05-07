@@ -1,0 +1,86 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Añadir empleado</h2>
+
+<!-- Formulario para añadir nuevo empleado -->
+<div class="card shadow">
+  <div class="card-body">
+    <h5 class="card-title">Añadir nuevo empleado</h5>
+    <form action="/empleados/add" method="POST" class="row g-3 mt-3">
+      <div class="col-md-4">
+        <label for="dni" class="form-label">DNI</label>
+        <input type="text" name="dni" id="dni" class="form-control" required>
+      </div>
+      <div class="col-md-4">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" name="nombre" id="nombre" class="form-control" required>
+      </div>
+      <div class="col-md-4">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" name="email" id="email" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input type="text" name="telefono" id="telefono" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input type="text" name="direccion" id="direccion" class="form-control" required>
+      </div>
+      <div class="col-md-4">
+        <label for="CP" class="form-label">CP</label>
+        <input type="text" name="CP" id="CP" class="form-control" required>
+      </div>
+      <div class="col-md-4">
+        <label for="poblacion" class="form-label">Población</label>
+        <input type="text" name="poblacion" id="poblacion" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label for="provincia" class="form-label">Provincia</label>
+        <input type="text" name="provincia" id="provincia" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label for="IBAN" class="form-label">IBAN</label>
+        <input type="text" name="IBAN" id="IBAN" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label d-block">Estado Civil</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="estado_civil" id="soltero" value="Soltero">
+          <label class="form-check-label" for="soltero">Soltero</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="estado_civil" id="casado" value="Casado">
+          <label class="form-check-label" for="casado">Casado</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="estado_civil" id="otro_estado" value="Otro">
+          <label class="form-check-label" for="otro_estado">Otro</label>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label d-block">Sexo</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sexo" id="masculino" value="Masculino">
+          <label class="form-check-label" for="masculino">Masculino</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sexo" id="femenino" value="Femenino">
+          <label class="form-check-label" for="femenino">Femenino</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sexo" id="otro_sexo" value="Otro">
+          <label class="form-check-label" for="otro_sexo">Otro</label>
+        </div>
+      </div>
+
+      <div class="col-12 text-end">
+        <button type="submit" class="btn btn-success">Crear</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

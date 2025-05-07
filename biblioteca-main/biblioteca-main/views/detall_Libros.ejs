@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Detalles del libro</h2>
+
+<div class="card shadow">
+  <!-- Título del card con estilo -->
+  <div class="card-title bg-secondary text-white p-3 rounded-top">
+    <h5 class="mb-0">
+      <i class="bi bi-book me-2"></i>
+      <%= libro.titulo || 'Título no disponible' %>
+    </h5>
+  </div>
+
+  <!-- Contenido del card -->
+  <div class="card-body">
+    <p class="card-text"><strong>Año de publicación:</strong> <%= libro.anio_publicacion || "No registrado" %></p>
+    <p class="card-text">
+      <strong>Autor:</strong>
+      ID <%= libro.autor_id %> - <%= libro.autor_nombre %>
+    </p>
+    
+    <p class="card-text">
+      <strong>Editorial:</strong>
+      ID <%= libro.editorial_id %> - <%= libro.editorial_nombre %>
+    </p>
+    <p class="card-text"><strong>Año de publicación:</strong> <%= libro.anio_publicacion || "No registrado" %></p>
+
+
+    <div class="text-end">
+      <a href="/libros" class="btn btn-secondary">Volver a la lista</a>
+      <a href="/libros/editar/<%= libro.id %>" class="btn btn-warning">Editar</a>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

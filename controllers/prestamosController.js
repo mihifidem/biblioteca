@@ -15,8 +15,9 @@ exports.getAllPrestamos = async (req, res) => {
 
   const [usuarios] = await pool.query('SELECT * FROM usuarios');
   const [libros] = await pool.query('SELECT * FROM libros');
-
-  res.render('prestamos', { prestamos, usuarios, libros });
+  const botones = true;
+  titulo_listado = "";
+  res.render('prestamos', { prestamos, usuarios, libros, botones,titulo_listado });
 };
 
 // Crear préstamo

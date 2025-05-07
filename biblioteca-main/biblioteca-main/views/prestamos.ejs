@@ -1,0 +1,91 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Préstamos registrados</h2>
+
+<!-- Lista de préstamos -->
+<ul class="list-group mb-4 shadow-sm">
+  <% if (prestamos.length > 0) { %>
+    <% prestamos.forEach(prestamo => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-start flex-column flex-md-row">
+        <div>
+          <strong><%= prestamo.usuario %></strong> ha prestado <em>"<%= prestamo.libro %>"</em><br>
+          <small>
+            desde:
+            <% if (prestamo.fecha_prestamo) { %>
+              <%= new Date(prestamo.fecha_prestamo).toISOString().split('T')[0] %>
+            <% } else { %>
+              no especificada
+            <% } %>
+            &nbsp; | &nbsp;
+            hasta:
+            <% if (prestamo.fecha_devolucion) { %>
+              <%= new Date(prestamo.fecha_devolucion).toISOString().split('T')[0] %>
+            <% } else { %>
+              sin devolución
+            <% } %>
+            <% if (prestamo.fecha_devolucion) { %>
+              <span class="badge bg-success">Devuelto</span>
+            <% } %>
+          </small>
+        </div>
+        <div class="d-flex flex-wrap gap-2 mt-2 mt-md-0">
+          <a href="/prestamos/eliminar/<%= prestamo.id %>" class="btn btn-sm btn-danger">Eliminar</a>
+          
+          <% if (!prestamo.fecha_devolucion) { %>
+            <a href="/prestamos/editar/<%= prestamo.id %>" class="btn btn-sm btn-primary">Editar</a>
+
+            <form action="/prestamos/devolver/<%= prestamo.id %>" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-sm btn-warning">Devolver</button>
+            </form>
+          <% } %>
+        </div>
+      </li>
+    <% }); %>
+  <% } else { %>
+    <li class="list-group-item text-muted">No hay préstamos registrados.</li>
+  <% } %>
+</ul>
+
+<!-- Formulario para registrar nuevo préstamo -->
+<div class="card shadow">
+  <div class="card-body">
+    <h5 class="card-title">Registrar nuevo préstamo</h5>
+    <form action="/prestamos/crear" method="POST" class="row g-3 mt-3">
+      <div class="col-md-4">
+        <label for="usuario_id" class="form-label">Usuario</label>
+        <select name="usuario_id" id="usuario_id" class="form-select" required>
+          <option value="">Selecciona un usuario</option>
+          <% usuarios.forEach(usuario => { %>
+            <option value="<%= usuario.id %>"><%= usuario.nombre %></option>
+          <% }); %>
+        </select>
+      </div>
+
+      <div class="col-md-4">
+        <label for="libro_id" class="form-label">Libro</label>
+        <select name="libro_id" id="libro_id" class="form-select" required>
+          <option value="">Selecciona un libro</option>
+          <% libros.forEach(libro => { %>
+            <option value="<%= libro.id %>"><%= libro.titulo %></option>
+          <% }); %>
+        </select>
+      </div>
+
+      <div class="col-md-2">
+        <label for="fecha_prestamo" class="form-label">Fecha préstamo</label>
+        <input type="date" name="fecha_prestamo" id="fecha_prestamo" class="form-control" required>
+      </div>
+
+      <div class="col-md-2">
+        <label for="fecha_devolucion" class="form-label">Fecha devolución (opcional)</label>
+        <input type="date" name="fecha_devolucion" id="fecha_devolucion" class="form-control">
+      </div>
+
+      <div class="col-12 text-end">
+        <button type="submit" class="btn btn-success">Guardar préstamo</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
