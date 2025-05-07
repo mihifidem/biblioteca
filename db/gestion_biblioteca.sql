@@ -140,3 +140,5 @@ UPDATE libros SET id_categoria = 2 WHERE id = 7;
 UPDATE libros SET id_categoria = 1 WHERE id = 8;
 UPDATE libros SET id_categoria = 3 WHERE id = 9;
 UPDATE libros SET id_categoria = 2 WHERE id = 10;
+
+--Falta poner la tabla de categorias libros
