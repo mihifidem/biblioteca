@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Detalles del autor</h2>
+
+<div class="card shadow">
+  <!-- Título con fondo y estilo -->
+  <div class="card-title bg-secondary text-white p-3 rounded-top">
+    <h5 class="mb-0">
+      <i class="bi bi-book me-2"></i>
+      <%= autor.nombre || 'Nombre no disponible' %>
+    </h5>
+  </div>
+
+  <!-- Cuerpo del contenido -->
+  <div class="card-body">
+    <p class="card-text"><strong>Nacionalidad:</strong> <%= autor.nacionalidad || "No registrada" %></p>
+    <div class="text-end">
+      <a href="/autores" class="btn btn-secondary">Volver a la lista</a>
+      <a href="/autores/editar/<%= autor.id %>" class="btn btn-warning">Editar</a>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

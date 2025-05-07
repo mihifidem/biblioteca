@@ -1,0 +1,56 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Editar préstamo</h2>
+
+<div class="card shadow">
+  <div class="card-body">
+    <form action="/prestamos/editar/<%= prestamo.id %>" method="POST" class="row g-3">
+      
+      <div class="col-md-6">
+        <label for="usuario_id" class="form-label">Usuario</label>
+        <select name="usuario_id" id="usuario_id" class="form-select bg-light border-primary" required>
+          <% usuarios.forEach(usuario => { %>
+            <option value="<%= usuario.id %>" <%= usuario.id === prestamo.usuario_id ? 'selected' : '' %>>
+              <%= usuario.nombre %> <%= usuario.apellido %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+      
+      <div class="col-md-6">
+        <label for="libro_id" class="form-label">Libro</label>
+        <select name="libro_id" id="libro_id" class="form-select bg-light border-primary" required>
+          <% libros.forEach(libro => { %>
+            <option value="<%= libro.id %>" <%= libro.id === prestamo.libro_id ? 'selected' : '' %>>
+              <%= libro.titulo %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+
+      <input type="date" name="fecha_prestamo" id="fecha_prestamo"
+  value="<%= prestamo.fecha_prestamo ? prestamo.fecha_prestamo.toISOString().split('T')[0] : '' %>"
+  class="form-control" required>
+
+<input type="date" name="fecha_devolucion" id="fecha_devolucion"
+  value="<%= prestamo.fecha_devolucion ? prestamo.fecha_devolucion.toISOString().split('T')[0] : '' %>"
+  class="form-control">
+
+      <div class="col-md-6">
+        <label for="estado" class="form-label">Estado</label>
+        <select name="estado" id="estado" class="form-select bg-light border-primary" required>
+          <option value="pendiente" class="text-warning" <%= prestamo.estado === 'pendiente' ? 'selected' : '' %>>🔄 Pendiente</option>
+          <option value="devuelto" class="text-success" <%= prestamo.estado === 'devuelto' ? 'selected' : '' %>>✅ Devuelto</option>
+        </select>
+      </div>
+      
+
+      <div class="col-12 text-end">
+        <a href="/prestamos" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

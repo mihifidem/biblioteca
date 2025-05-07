@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Empleados registrados</h2>
+<a href="/empleados/crear" class="btn btn-sm btn-success mb-3">Crear</a>
+
+<!-- Lista de empleados -->
+<ul class="list-group mb-4 shadow-sm">
+  <% if (empleados.length > 0) { %>
+    <% empleados.forEach(empleado => { %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><strong><%= empleado.dni %></strong> - <%= empleado.nombre %> - <%= empleado.email %></span>
+        <div class="d-flex">
+          <a href="/empleados/ver/<%= empleado.id_empleado %>" class="btn btn-sm btn-info me-2">Ver</a> 
+          <a href="/empleados/editar/<%= empleado.id_empleado %>" class="btn btn-sm btn-warning me-2">Editar</a>     
+          <a href="/empleados/eliminar/<%= empleado.id_empleado %>" class="btn btn-sm btn-danger">Eliminar</a>
+        </div>
+        
+      </li>
+    <% }); %>
+  <% } else { %>
+    <li class="list-group-item text-muted">No hay empleados registrados.</li>
+  <% } %>
+</ul>
+
+
+
+<%- include('partials/footer') %>

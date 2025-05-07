@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Detalles de la editorial</h2>
+
+<div class="card shadow">
+  <!-- Título con fondo personalizado -->
+  <div class="card-title bg-secondary text-white p-3 rounded-top">
+    <h5 class="mb-0">
+      <i class="bi bi-building me-2"></i>
+      <%= editorial.nombre || 'Nombre no disponible' %>
+    </h5>
+  </div>
+
+  <!-- Contenido del cuerpo -->
+  <div class="card-body">
+    <p class="card-text"><strong>Dirección:</strong> <%= editorial.direccion || "No registrada" %></p>
+    <div class="text-end">
+      <a href="/editoriales" class="btn btn-secondary">Volver a la lista</a>
+      <a href="/editoriales/editar/<%= editorial.id %>" class="btn btn-warning">Editar</a>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
