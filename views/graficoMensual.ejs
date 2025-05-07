@@ -1,0 +1,41 @@
+<%- include('partials/header') %>
+
+<h2 class="mb-4 text-primary">Gráfico de Alquileres por Mes</h2>
+
+<canvas id="alquileresChart" style="width:300px;height:100px;"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>;
+<script>
+  const alquileres = <%- JSON.stringify(results) %>;
+
+  const etiquetas = alquileres.map(item => `${item.anio}-${item.mes < 10 ? '0' + item.mes : item.mes}`);
+  const datos = alquileres.map(item => item.cantidad_prestamos);
+
+  const ctx = document.getElementById('alquileresChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    options:{
+      responsive:true,
+      maintainAspectRatio: false
+    },
+    data: {
+      labels: etiquetas,
+      datasets: [{
+        label: 'Cantidad de Préstamos',
+        data: datos,
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+<%- include('partials/footer') %>

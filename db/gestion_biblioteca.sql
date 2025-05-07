@@ -140,3 +140,10 @@ UPDATE libros SET id_categoria = 2 WHERE id = 7;
 UPDATE libros SET id_categoria = 1 WHERE id = 8;
 UPDATE libros SET id_categoria = 3 WHERE id = 9;
 UPDATE libros SET id_categoria = 2 WHERE id = 10;
+
+alter table libros add precio decimal (5,2);
+
+
+
+alter table libros add paginas int;
+alter table libros add dibujos int;

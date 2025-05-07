@@ -4,9 +4,21 @@ const pool = require('../db/conexion');
 exports.menuDashboard = (req, res) => {
   res.render("dashboard"); // ✅ nombre correcto de la vista
 };
+ exports.buenoBonitoBaratoDashboard = async (req, res) =>{
+  const [libros] = await pool.query(`select *
+from libros
+where precio = (select min(precio) from libros)
+UNION
+select *
+from libros
+where paginas = (select min(paginas) from libros)
+UNION
+select *
+from libros
+where dibujos = (select min(dibujos) from libros);`)
 
-
-
+ res.render("libros",{libros,autores:[], editoriales:[]}); 
+  };
 // Mostrar los prestamos más antiguos
 exports.pendientesAntiguosDashboard = async (req, res) => {
   const [prestamos] = await pool.query(`
@@ -25,6 +37,26 @@ exports.pendientesAntiguosDashboard = async (req, res) => {
   res.render("prestamos",{prestamos, usuarios, libros,botones, titulo_listado}); // ✅ nombre correcto de la vista
 };
 
+exports.graficoMensualDashboard = async (req, res) => {
+  try {
+    const [results] = await pool.query(
+      `SELECT
+        YEAR(p.fecha_prestamo) AS anio,
+        MONTH(p.fecha_prestamo) AS mes,
+        COUNT(*) AS cantidad_prestamos
+      FROM prestamos p
+      GROUP BY anio, mes
+      ORDER BY anio ASC, mes ASC;`
+    );
+   
+
+    res.render('graficoMensual', { results });
+
+  } catch (error) {
+    console.error('Error al obtener los alquileres por mes:', error);
+    res.status(500).send('Error al obtener los alquileres por mes');
+  } 
+};
 // Mostrar prestamos por autor
 exports.prestamosAutorDashboard = async (req, res) => {
   const [prestamos] = await pool.query(`

@@ -32,12 +32,12 @@
     <form action="/libros/crear" method="POST" class="row g-3 mt-3">
       <div class="col-md-6">
         <label for="titulo" class="form-label">Título del libro</label>
-        <input type="text" name="titulo" id="titulo" class="form-control"  >
+        <input type="text" name="titulo" id="titulo" class="form-control" required>
       </div>
 
       <div class="col-md-3">
         <label for="autor_id" class="form-label">Autor</label>
-        <select name="autor_id" id="autor_id" class="form-select"  >
+        <select name="autor_id" id="autor_id" class="form-select" required>
           <option value="">Selecciona un autor</option>
           <% autores.forEach(autor => { %>
             <option value="<%= autor.id %>"><%= autor.nombre %></option>
@@ -47,7 +47,7 @@
 
       <div class="col-md-3">
         <label for="editorial_id" class="form-label">Editorial</label>
-        <select name="editorial_id" id="editorial_id" class="form-select"  >
+        <select name="editorial_id" id="editorial_id" class="form-select" required>
           <option value="">Selecciona una editorial</option>
           <% editoriales.forEach(editorial => { %>
             <option value="<%= editorial.id %>"><%= editorial.nombre %></option>
