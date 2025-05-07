@@ -118,3 +118,4 @@ ADD sexo VARCHAR(10);
 
 
 ALTER TABLE libros ADD COLUMN anio_publicacion YEAR;
+

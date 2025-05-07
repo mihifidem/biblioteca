@@ -28,47 +28,47 @@
       <div class="col-md-6">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" name="nombre" id="nombre" class="form-control" 
-        value="<%= usuario.nombre || '' %>" required>
+        value="<%= usuario.nombre || '' %>"  >
       </div>
       <div class="col-md-6">
         <label for="email" class="form-label">Correo electrónico</label>
         <input type="email" name="email" id="email" class="form-control" 
-        value="<%= usuario.email || '' %>" required>
+        value="<%= usuario.email || '' %>"  >
       </div>
       
       <!-- Nuevo campo: Teléfono -->
       <div class="col-md-3">
         <label for="telefono" class="form-label">Teléfono</label>
         <input type="tel" name="telefono" id="telefono" class="form-control"
-        value="<%= usuario.telefono || '' %>" pattern="^\d{9}$" placeholder="Número de teléfono" required>
+        value="<%= usuario.telefono || '' %>" pattern="^\d{9}$" placeholder="Número de teléfono"  >
       </div>
       
       <!-- Nuevo campo: Dirección -->
       <div class="col-md-6">
         <label for="direccion" class="form-label">Dirección</label>
         <input type="text" name="direccion" id="direccion" class="form-control"
-        value="<%= usuario.direccion || '' %>" required>
+        value="<%= usuario.direccion || '' %>"  >
       </div>
       
       <!-- Nuevo campo: Código Postal (CP) -->
       <div class="col-md-3">
         <label for="cp" class="form-label">Código Postal</label>
         <input type="text" name="CP" id=CP" class="form-control"
-        value="<%= usuario.CP || '' %>" required>
+        value="<%= usuario.CP || '' %>"  >
       </div>
       
       <!-- Nuevo campo: Población -->
       <div class="col-md-6">
         <label for="poblacion" class="form-label">Población</label>
         <input type="text" name="poblacion" id="poblacion" class="form-control"
-        value="<%= usuario.poblacion || '' %>" required>
+        value="<%= usuario.poblacion || '' %>"  >
       </div>
       
       <!-- Nuevo campo: Provincia -->
       <div class="col-md-6">
         <label for="provincia" class="form-label">Provincia</label>
         <input type="text" name="provincia" id="provincia" class="form-control"
-        value="<%= usuario.provincia || '' %>" required>
+        value="<%= usuario.provincia || '' %>"  >
       </div>
       
       <!-- Nuevo campo: Estado civil -->
@@ -113,7 +113,11 @@
 
 
       <div class="col-12 text-end">
-        <button type="submit" class="btn btn-success"><%= usuario.id ? 'Actualizar' : 'Crear' %></button>
+        <div id="error">
+          <% if (error) { %>
+            <p style="color: red;"><%= error %></p>
+          <% } %>        </div>
+        <button type="submit" class="btn btn-success"><%= usuario ? 'Actualizar' : 'Crear' %></button>
       </div>
     </form>
   </div>

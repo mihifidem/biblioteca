@@ -2,9 +2,15 @@ const pool = require('../db/conexion');
 
 // Mostrar todos los autores
 exports.getAllAutores = async (req, res) => {
-  const [autores] = await pool.query('SELECT * FROM autores');
-  res.render('autores', { autores });
+  try {
+    const [autores] = await pool.query('SELECT * FROM autores');
+    res.render('autores', { autores });
+  } catch (error) {
+    console.error('Error al obtener los autores:', error);
+    res.status(500).send('Error interno del servidor');
+  }
 };
+
 
 // Crear autor nuevo
 exports.createAutor = async (req, res) => {

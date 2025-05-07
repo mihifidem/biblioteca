@@ -53,7 +53,7 @@
     <form action="/prestamos/crear" method="POST" class="row g-3 mt-3">
       <div class="col-md-4">
         <label for="usuario_id" class="form-label">Usuario</label>
-        <select name="usuario_id" id="usuario_id" class="form-select" required>
+        <select name="usuario_id" id="usuario_id" class="form-select"  >
           <option value="">Selecciona un usuario</option>
           <% usuarios.forEach(usuario => { %>
             <option value="<%= usuario.id %>"><%= usuario.nombre %></option>
@@ -63,7 +63,7 @@
 
       <div class="col-md-4">
         <label for="libro_id" class="form-label">Libro</label>
-        <select name="libro_id" id="libro_id" class="form-select" required>
+        <select name="libro_id" id="libro_id" class="form-select"  >
           <option value="">Selecciona un libro</option>
           <% libros.forEach(libro => { %>
             <option value="<%= libro.id %>"><%= libro.titulo %></option>
@@ -73,7 +73,7 @@
 
       <div class="col-md-2">
         <label for="fecha_prestamo" class="form-label">Fecha préstamo</label>
-        <input type="date" name="fecha_prestamo" id="fecha_prestamo" class="form-control" required>
+        <input type="date" name="fecha_prestamo" id="fecha_prestamo" class="form-control"  >
       </div>
 
       <div class="col-md-2">

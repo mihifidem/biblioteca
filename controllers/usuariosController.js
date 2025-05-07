@@ -3,13 +3,38 @@ const pool = require('../db/conexion');
 // Mostrar todos los usuarios
 exports.getAllUsuarios = async (req, res) => {
   const [usuarios] = await pool.query('SELECT * FROM usuarios');
-  res.render('usuarios', { usuarios , usuario:{}, action:'/usuarios/crear'});
+  
+  res.render('usuarios', { usuarios , usuario:{}, action:'/usuarios/crear',error:{}});
 };
 
 // Crear usuario nuevo
 exports.createUsuario = async (req, res) => {
   const { nombre, email, telefono, direccion, CP, poblacion, provincia, estado_civil, sexo } = req.body;
-  
+  // Expresiones regulares de validación
+  const regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,50}$/;
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const regexTelefono = /^\d{9}$/;
+  const regexCP = /^\d{5}$/;
+   // Validación de campos
+   if (
+    !regexNombre.test(nombre) ||
+    !regexEmail.test(email) ||
+    !regexTelefono.test(telefono) ||
+    !direccion || direccion.length < 3 ||
+    !regexCP.test(CP) ||
+    !regexNombre.test(poblacion) ||
+    !regexNombre.test(provincia) ||
+    !estado_civil ||
+    !sexo
+  ) {
+    return res.render('usuarios', {
+      error: 'Datos inválidos. Verifica el formulario.',
+      usuarios: [], 
+      usuario:{},
+      action: {}// o los usuarios actuales si los tienes
+    });    // return res.status(400).send('Datos inválidos. Verifica el formulario.');
+
+  }
   await pool.query(
     `INSERT INTO usuarios (nombre, email, telefono, direccion, CP, poblacion, provincia, estado_civil, sexo) 
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -30,7 +55,7 @@ exports.deleteUsuario = async (req, res) => {
 exports.editarUsuario = async (req, res) => {
   const { id } = req.params;
   const [result] = await pool.query('SELECT * FROM usuarios WHERE id = ?', [id]);
-  res.render('usuarios',{usuarios:{},usuario: result[0], action:`/usuarios/actualizar/${id}`})
+  res.render('usuarios',{usuarios:{},usuario: result[0], action:`/usuarios/actualizar/${id}`,error:{}})
 };
 
 // editar usuario
