@@ -4,6 +4,7 @@ const pool = require('../db/conexion');
 exports.menuDashboard = (req, res) => {
   res.render("dashboard"); // ✅ nombre correcto de la vista
 };
+<<<<<<< HEAD
 
 
 // Mostrar los prestamos más antiguos
@@ -73,3 +74,5 @@ FROM (
    
   res.render("categoria_genero",{results}); // 
 };
+=======
+>>>>>>> e9c32c435990b2c76805188172e57c9e6d8273e3
